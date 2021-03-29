@@ -101,14 +101,7 @@ command -v wget > /dev/null 2>&1 || {
 	printError "Require wget but it's not installed"
 	exit 1;
 }
-# command -v rpm > /dev/null 2>&1 || {
-# 	printError "Require rpm but it's not installed"
-# 	exit 1;
-}
-command -v yum > /dev/null 2>&1 || {
-	printError "Require yum but it's not installed"
-	exit 1;
-}
+
 
 printInfo ">>>> install mysql by rpm"
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb
