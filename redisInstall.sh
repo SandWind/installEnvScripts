@@ -83,7 +83,9 @@ rm -rf ${path}
 
 printf "${CYAN}>>>> modify redis config${RESET}\n"
 cp redis.conf /etc/redis.conf
+chmod +x /etc/redis.conf
 sed -i "s/^port 6379/port ${port}/g" /etc/redis.conf
+
 if [[ -n ${password} ]]; then
 	sed -i "s/^protected-mode no/protected-mode yes/g" /etc/redis.conf
 	sed -i "s/^# requirepass/requirepass ${password}/g" /etc/redis.conf
