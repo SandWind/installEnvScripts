@@ -77,12 +77,12 @@ mv ${temp}/redis-${version} ${path}
 printf "${CYAN}>>>> compile redis${RESET}\n"
 cd ${path}
 make && make install
-rm -rf ${temp}
+cp ${path}/redis.conf /etc/redis.conf.default
+rm -rf ${path}/redis-${version}
 cd -
 
 printf "${CYAN}>>>> modify redis config${RESET}\n"
-cp ${path}/redis.conf ${path}/redis.conf.default
-cp redis.conf ${path}/redis.conf
+cp redis.conf /etc/redis.conf
 sed -i "s/^port 6379/port ${port}/g" ${path}/redis.conf
 if [[ -n ${password} ]]; then
 	sed -i "s/^protected-mode no/protected-mode yes/g" ${path}/redis.conf
