@@ -128,8 +128,8 @@ mysql hard nofile 65536
 EOF
 
 printInfo ">>>> start mysqld"
-systemctl enable mysqld
-systemctl start mysqld
+systemctl enable mysql
+systemctl start mysql
 systemctl daemon-reload
 
 

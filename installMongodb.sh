@@ -19,7 +19,7 @@ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu $codename/mon
 sudo apt-get update
 sudo apt-get install -y mongodb-org=4.4.4 mongodb-org-server=4.4.4 mongodb-org-shell=4.4.4 mongodb-org-mongos=4.4.4 mongodb-org-tools=4.4.4
 systemctl start  mongod
-sleep 3
+sleep 10
 systemctl enable mongod
 result=$(systemctl|grep mongo)
 echo $result
@@ -33,3 +33,4 @@ fi
 sed -i 's/#security:/security:\n  authorization: enabled/g' /etc/mongod.conf
 
 systemctl restart mongod
+systemctl daemon-reload

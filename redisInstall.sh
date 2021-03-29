@@ -115,3 +115,4 @@ systemctl start redis.service
 printf "\n${GREEN}<<<<<<<< install redis end${RESET}\n"
 printf "\n${PURPLE}redis service status: ${RESET}\n"
 systemctl status redis
+systemctl daemon-reload
