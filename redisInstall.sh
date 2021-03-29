@@ -67,7 +67,7 @@ sudo apt-get install -y make gcc g++  openssl libssl-dev
 # download and decompression
 printf "${CYAN}>>>> download redis${RESET}\n"
 temp="/tmp/redis"
-path="/usr/bin/redis"
+path="/opt/redis"
 mkdir -p ${temp}
 curl -o ${temp}/redis-${version}.tar.gz http://download.redis.io/releases/redis-${version}.tar.gz
 tar zxf ${temp}/redis-${version}.tar.gz -C ${temp}
@@ -79,8 +79,7 @@ cd ${path}
 make && make install
 cp ${path}/redis.conf /etc/redis.conf.default
 cd -
-rm -rf ${path}/redis-${version}
-
+rm -rf ${path}
 
 printf "${CYAN}>>>> modify redis config${RESET}\n"
 cp redis.conf /etc/redis.conf
