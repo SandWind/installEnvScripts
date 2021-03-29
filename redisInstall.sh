@@ -83,10 +83,10 @@ cd -
 
 printf "${CYAN}>>>> modify redis config${RESET}\n"
 cp redis.conf /etc/redis.conf
-sed -i "s/^port 6379/port ${port}/g" ${path}/redis.conf
+sed -i "s/^port 6379/port ${port}/g" /etc/redis.conf
 if [[ -n ${password} ]]; then
-	sed -i "s/^protected-mode no/protected-mode yes/g" ${path}/redis.conf
-	sed -i "s/^# requirepass/requirepass ${password}/g" ${path}/redis.conf
+	sed -i "s/^protected-mode no/protected-mode yes/g" /etc/redis.conf
+	sed -i "s/^# requirepass/requirepass ${password}/g" /etc/redis.conf
 fi
 
 printf "\n${CYAN}>>>> open redis port in firewall${RESET}\n"
@@ -100,8 +100,9 @@ chmod +x /usr/lib/systemd/system/redis.service
 mkdir -p /var/log/redis
 touch /var/log/redis/redis-server.log
 chmod 777 /var/log/redis/redis-server.log
-chmod 777 /var/log/redis/redis-server.log
-chown -R redis:redis /var/log/redis
+mkdir -p /run/redis/
+chmod 777 /run/redis
+
 
 # boot redis
 printf "${CYAN}>>>> start redis${RESET}\n"
