@@ -97,6 +97,11 @@ firewall-cmd --reload
 printf "${CYAN}>>>> set redis as a systemd service${RESET}\n"
 cp redis.service /usr/lib/systemd/system/
 chmod +x /usr/lib/systemd/system/redis.service
+mkdir -p /var/log/redis
+touch /var/log/redis/redis-server.log
+chmod 777 /var/log/redis/redis-server.log
+chmod 777 /var/log/redis/redis-server.log
+chown -R redis:redis /var/log/redis
 
 # boot redis
 printf "${CYAN}>>>> start redis${RESET}\n"
