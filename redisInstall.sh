@@ -62,7 +62,7 @@ printf "\t password = ${password}\n"
 printf "${RESET}\n"
 
 printf "${CYAN}>>>> install required libs${RESET}\n"
-apt-get install -y zlib zlib-devel gcc-c++ libtool openssl openssl-devel tcl
+sudo apt-get install -y make gcc g++  openssl libssl-dev
 
 # download and decompression
 printf "${CYAN}>>>> download redis${RESET}\n"
