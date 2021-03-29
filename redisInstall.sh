@@ -78,8 +78,9 @@ printf "${CYAN}>>>> compile redis${RESET}\n"
 cd ${path}
 make && make install
 cp ${path}/redis.conf /etc/redis.conf.default
-rm -rf ${path}/redis-${version}
 cd -
+rm -rf ${path}/redis-${version}
+
 
 printf "${CYAN}>>>> modify redis config${RESET}\n"
 cp redis.conf /etc/redis.conf
