@@ -16,13 +16,13 @@ printf "${BLUE}\n"
 cat << EOF
 ###################################################################################
 # 采用编译方式安装 Redis
-# @system: 适用于 CentOS7+
-# @author: Zhang Peng
+# @system: 适用于 sandwind
+# @author: pengding
 ###################################################################################
 EOF
 printf "${RESET}\n"
 
-command -v yum > /dev/null 2>&1 || {
+command -v apt > /dev/null 2>&1 || {
 	printf "${RED}Require yum but it's not installed.${RESET}\n";
 	exit 1;
 }
@@ -32,8 +32,8 @@ printf "\n${GREEN}>>>>>>>> install redis begin${RESET}\n"
 if [[ $# -lt 1 ]] || [[ $# -lt 2 ]] || [[ $# -lt 3 ]] || [[ $# -lt 4 ]]; then
 	printf "${PURPLE}[Hint]\n"
 	printf "\t Usage: sh redis-install.sh [version] [port] [password] \n"
-	printf "\t Default: sh redis-install.sh 5.0.4 6379 <null> \n"
-	printf "\t Example: sh redis-install.sh 5.0.4 6379 123456 \n"
+	printf "\t Default: sh redis-install.sh 5.0.7 6379 <null> \n"
+	printf "\t Example: sh redis-install.sh 5.0.7 6379 123456 \n"
 	printf "${RESET}\n"
 fi
 
@@ -47,10 +47,12 @@ if [[ -n $2 ]]; then
 	port=$2
 fi
 
+
 password=
 if [[ -n $3 ]]; then
 	password=$3
 fi
+read -p "请设置密码" password
 
 # install info
 printf "${PURPLE}[Install Info]\n"
@@ -60,12 +62,12 @@ printf "\t password = ${password}\n"
 printf "${RESET}\n"
 
 printf "${CYAN}>>>> install required libs${RESET}\n"
-yum install -y zlib zlib-devel gcc-c++ libtool openssl openssl-devel tcl
+apt-get install -y zlib zlib-devel gcc-c++ libtool openssl openssl-devel tcl
 
 # download and decompression
 printf "${CYAN}>>>> download redis${RESET}\n"
 temp="/tmp/redis"
-path="/usr/local/redis"
+path="/usr/bin/redis"
 mkdir -p ${temp}
 curl -o ${temp}/redis-${version}.tar.gz http://download.redis.io/releases/redis-${version}.tar.gz
 tar zxf ${temp}/redis-${version}.tar.gz -C ${temp}
@@ -80,7 +82,6 @@ cd -
 
 printf "${CYAN}>>>> modify redis config${RESET}\n"
 cp ${path}/redis.conf ${path}/redis.conf.default
-# wget -N https://gitee.com/turnon/linux-tutorial/raw/master/codes/linux/soft/config/redis/redis.conf -O ${path}/redis.conf
 cp redis.conf ${path}/redis.conf
 sed -i "s/^port 6379/port ${port}/g" ${path}/redis.conf
 if [[ -n ${password} ]]; then
@@ -94,7 +95,7 @@ firewall-cmd --reload
 
 # setting systemd service
 printf "${CYAN}>>>> set redis as a systemd service${RESET}\n"
-wget -N https://gitee.com/turnon/linux-tutorial/raw/master/codes/linux/soft/config/redis/redis.service -O /usr/lib/systemd/system/redis.service
+cp redis.service /usr/lib/systemd/system/
 chmod +x /usr/lib/systemd/system/redis.service
 
 # boot redis

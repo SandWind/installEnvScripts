@@ -103,7 +103,7 @@ command -v wget > /dev/null 2>&1 || {
 }
 
 
-printInfo ">>>> install mysql by rpm"
+printInfo ">>>> install mysql by apt"
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb
 # sudo rpm -Uvh mysql80-community-release-el7-3.noarch.rpm
 # sudo yum install mysql-community-server
@@ -111,11 +111,8 @@ sudo dpkg -i mysql-apt-config_0.8.16-1_all.deb
 sudo apt-get update
 sudo apt install mysql-client mysql-community-server mysql-server -y
 
-
 printInfo ">>>> modify my.cnf"
-cp /etc/my.cnf /etc/my.cnf.bak
-# wget -N https://gitee.com/turnon/linux-tutorial/raw/master/codes/linux/soft/config/mysql/my.cnf -O /etc/my.cnf
-cp my.cnf /etc/my.cnf
+cp my.conf /etc/mysql/mysql.conf.d/mysqld.cnf
 printInfo ">>>> create mysql log file"
 mkdir -p /var/log/mysql
 touch /var/log/mysql/mysql.log
@@ -135,8 +132,9 @@ systemctl enable mysqld
 systemctl start mysqld
 systemctl daemon-reload
 
+
 printInfo ">>>> 管理员密码如下，请登录 mysql 后重置新密码："
 password=$(grep "password" /var/log/mysql/mysql.log | awk '{print $NF}')
 blueOutput "${password}"
-
+rm  -f mysql-apt-config_0.8.16-1_all.deb
 printInfo "<<<< install mysql success"
