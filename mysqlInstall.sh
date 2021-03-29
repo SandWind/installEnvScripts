@@ -101,9 +101,9 @@ command -v wget > /dev/null 2>&1 || {
 	printError "Require wget but it's not installed"
 	exit 1;
 }
-command -v rpm > /dev/null 2>&1 || {
-	printError "Require rpm but it's not installed"
-	exit 1;
+# command -v rpm > /dev/null 2>&1 || {
+# 	printError "Require rpm but it's not installed"
+# 	exit 1;
 }
 command -v yum > /dev/null 2>&1 || {
 	printError "Require yum but it's not installed"
@@ -111,9 +111,13 @@ command -v yum > /dev/null 2>&1 || {
 }
 
 printInfo ">>>> install mysql by rpm"
-wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
-sudo rpm -Uvh mysql80-community-release-el7-3.noarch.rpm
-sudo yum install mysql-community-server
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb
+# sudo rpm -Uvh mysql80-community-release-el7-3.noarch.rpm
+# sudo yum install mysql-community-server
+sudo dpkg -i mysql-apt-config_0.8.16-1_all.deb
+sudo apt-get update
+sudo apt install mysql-client mysql-community-server mysql-server -y
+
 
 printInfo ">>>> modify my.cnf"
 cp /etc/my.cnf /etc/my.cnf.bak
