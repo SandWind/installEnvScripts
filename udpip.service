@@ -1,0 +1,11 @@
+[Unit]
+Description=udp broadcast ip
+After=network.target
+
+[Service]
+Type=forking
+EnvironmentFile=/root/udpsimpleserver.py
+ExecStart=nohup python3 /root/udpsimpleserver.py > /dev/null 2>&1 &
+
+[Install]
+WantedBy=multi-user.target
