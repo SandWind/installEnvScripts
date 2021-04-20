@@ -12,7 +12,10 @@ then
    codename="bionic" 
 elif [[ $verstr =~ "xenial" ]]
 then
-    codename="xenial" 
+    codename="xenial"
+elif [[ $verstr =~ "groovy" ]]
+then
+   codename="focal"  
 fi
 echo "执行$codename 安装"
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu $codename/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list

@@ -37,7 +37,7 @@ if [[ $# -lt 1 ]] || [[ $# -lt 2 ]] || [[ $# -lt 3 ]] || [[ $# -lt 4 ]]; then
 	printf "${RESET}\n"
 fi
 
-version=5.0.7
+version=6.0.9
 if [[ -n $1 ]]; then
 	version=$1
 fi
@@ -52,7 +52,7 @@ password=
 if [[ -n $3 ]]; then
 	password=$3
 fi
-read -p "请设置密码" password
+read -p "请设置密码: " password
 
 # install info
 printf "${PURPLE}[Install Info]\n"
@@ -69,8 +69,9 @@ printf "${CYAN}>>>> download redis${RESET}\n"
 temp="/tmp/redis"
 path="/opt/redis"
 mkdir -p ${temp}
-curl -o ${temp}/redis-${version}.tar.gz http://download.redis.io/releases/redis-${version}.tar.gz
-tar zxf ${temp}/redis-${version}.tar.gz -C ${temp}
+##curl -o ${temp}/redis-${version}.tar.gz http://download.redis.io/releases/redis-${version}.tar.gz
+cp redis-${version}.tar.gz ${temp}
+tar zxvf  ${temp}/redis-${version}.tar.gz -C ${temp}
 mv ${temp}/redis-${version} ${path}
 
 # configure and makefile
@@ -79,7 +80,7 @@ cd ${path}
 make && make install
 cp ${path}/redis.conf /etc/redis.conf.default
 cd -
-rm -rf ${path}
+#rm -rf ${path}
 
 printf "${CYAN}>>>> modify redis config${RESET}\n"
 cp redis.conf /etc/redis.conf
