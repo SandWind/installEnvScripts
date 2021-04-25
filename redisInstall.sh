@@ -66,21 +66,22 @@ sudo apt-get install -y make gcc g++  openssl libssl-dev
 
 # download and decompression
 printf "${CYAN}>>>> download redis${RESET}\n"
-temp="/tmp/redis"
-path="/opt/redis"
+temp="/tmp/"
+path="/opt/"
 mkdir -p ${temp}
 ##curl -o ${temp}/redis-${version}.tar.gz http://download.redis.io/releases/redis-${version}.tar.gz
 cp redis-${version}.tar.gz ${temp}
-tar zxvf  ${temp}/redis-${version}.tar.gz -C ${temp}
-mv ${temp}/redis-${version} ${path}
+cd ${temp}
+tar zxvf  ${temp}redis-${version}.tar.gz -C ${temp}
+mv ${temp}redis-${version} ${path}
 
 # configure and makefile
 printf "${CYAN}>>>> compile redis${RESET}\n"
-cd ${path}
-make && make install
-cp ${path}/redis.conf /etc/redis.conf.default
-cd -
-#rm -rf ${path}
+cd ${path}redis-${version}
+make && make install 
+cp ${path}redis-${version}/redis.conf /etc/redis.conf.default
+cd ~/installEnvScripts/
+rm -rf ${path}redis-${version}
 
 printf "${CYAN}>>>> modify redis config${RESET}\n"
 cp redis.conf /etc/redis.conf
@@ -117,3 +118,4 @@ printf "\n${GREEN}<<<<<<<< install redis end${RESET}\n"
 printf "\n${PURPLE}redis service status: ${RESET}\n"
 systemctl status redis
 systemctl daemon-reload
+cd  ~/installEnvScripts/
