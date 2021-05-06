@@ -74,13 +74,13 @@ cp redis-${version}.tar.gz ${temp}
 cd ${temp}
 tar zxvf  ${temp}redis-${version}.tar.gz -C ${temp}
 mv ${temp}redis-${version} ${path}
-
+cd -
 # configure and makefile
 printf "${CYAN}>>>> compile redis${RESET}\n"
 cd ${path}redis-${version}
 make && make install 
+cd -
 cp ${path}redis-${version}/redis.conf /etc/redis.conf.default
-cd ~/installEnvScripts/
 rm -rf ${path}redis-${version}
 
 printf "${CYAN}>>>> modify redis config${RESET}\n"
@@ -118,4 +118,4 @@ printf "\n${GREEN}<<<<<<<< install redis end${RESET}\n"
 printf "\n${PURPLE}redis service status: ${RESET}\n"
 systemctl status redis
 systemctl daemon-reload
-cd  ~/installEnvScripts/
+  
