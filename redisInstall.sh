@@ -37,7 +37,7 @@ if [[ $# -lt 1 ]] || [[ $# -lt 2 ]] || [[ $# -lt 3 ]] || [[ $# -lt 4 ]]; then
 	printf "${RESET}\n"
 fi
 
-version=6.0.9
+version=5.0.12
 if [[ -n $1 ]]; then
 	version=$1
 fi
