@@ -1,1 +1,2 @@
 useradd -d /home/sandwind -g sandwind  -m -s /bin/bash sandwind
+useradd -d /home/sand -g sand  -m -s /bin/bash sand

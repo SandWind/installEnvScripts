@@ -37,3 +37,5 @@ sed -i 's/#security:/security:\n  authorization: enabled/g' /etc/mongod.conf
 
 systemctl restart mongod
 systemctl daemon-reload
+
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
