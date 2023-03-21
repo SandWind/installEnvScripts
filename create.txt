@@ -1,2 +1,19 @@
 useradd -d /home/sandwind -g sandwind  -m -s /bin/bash sandwind
 useradd -d /home/sand -g sand  -m -s /bin/bash sand
+
+useradd -d /home/gamedbs -g db  -m -s /bin/bash gamedbs
+
+useradd -d /home/goscon -g goscon -m -s /bin/bash goscon
+
+useradd -d /home/payback -g pay -m -s /bin/bash payback
+
+useradd -d /home/dragonres  -g hotreload -m -s /bin/bash  dragonres
+
+useradd -d /home/work -g nginx -m -s /bin/bash work
+
+useradd -d /home/work -g nginx -m -s /bin/bash work
+
+
+useradd -d /home/work -g sudo -m -s /bin/bash work
+
+useradd -d // -g gm  -m -s /bin/bash gmtools
